@@ -2,3 +2,4 @@ keras
 numpy
 pillow
 tensorflow
+pywin32
