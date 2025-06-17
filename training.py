@@ -20,17 +20,16 @@ y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
 
 # normalize the data to the range of 0-1 from 0-255(used in pixel values)
-x_train = x_train.astype('float32')
-x_test = x_test.astype('float32')
-x_train /= 255
-x_test /= 255
+x_train = x_train.astype('float32') / 255
+x_test = x_test.astype('float32') / 255
+
 
 print('x_train shape:', x_train.shape)
 print(x_train.shape[0], 'train samples')
 print(x_test.shape[0], 'test samples')
 
 batch_size = 128
-epochs = 10
+epochs = 15
 
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3),activation='relu',input_shape=input_shape))
@@ -39,7 +38,7 @@ model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
 model.add(Flatten())
 model.add(Dense(256, activation='relu'))
-model.add(Dropout(0.5))
+model.add(Dropout(0.6))
 model.add(Dense(num_classes, activation='softmax'))
 
 model.compile(loss=keras.losses.categorical_crossentropy,optimizer=keras.optimizers.Adadelta(),metrics=['accuracy'])
